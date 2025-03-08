@@ -1,0 +1,20 @@
+<header>
+    <h1>My Web3 E-Commerce Store</h1>
+    <p>Now accepting Worldcoin payments!</p>
+    {% if user.is_authenticated %}
+    <a href="{% url 'logout' %}">Logout</a>
+    {% else %}
+    <a href="{% url 'login' %}">Login</a> | <a href="{% url 'signup' %}">Sign Up</a>
+    {% endif %}
+</header>
+
+<section class="products">
+    {% for product in products %}
+    <div class="product">
+        <img src="{{ product.image }}" alt="{{ product.name }}">
+        <h2>{{ product.name }}</h2>
+        <p>${{ product.price }}</p>
+        <a href="{% url 'checkout' %}?product_id={{ product.id }}" class="buy-button">Buy with Worldcoin</a>
+    </div>
+    {% endfor %}
+</section>
